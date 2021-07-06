@@ -9,8 +9,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Qntastic.Models;
 
-namespace Qmanager
+namespace Qntastic
 {
     /// <summary>
     /// Interaction logic for CreateEntry.xaml
@@ -25,6 +26,17 @@ namespace Qmanager
         private void EnterButton_MouseEnter(object sender, MouseEventArgs e)
         {
             EnterButton.Foreground = Brushes.Black;
+        }
+
+        private void EnterButton_Click(object sender, RoutedEventArgs e)
+        {
+            new Entry { name = nameinput.Text, phone = phoneinput.Text, queue = State.SelectedQueue }.save();
+            try
+            {
+                ((Dashboard)Owner).showEntries();
+            }
+            catch { }
+            this.Close();
         }
     }
 }

@@ -1,8 +1,8 @@
-﻿<Application x:Class="Qmanager.App"
+﻿<Application x:Class="Qntastic.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:Qmanager"
-             StartupUri="MainWindow.xaml">
+             xmlns:local="clr-namespace:Qntastic"
+             StartupUri="Dashboard.xaml">
     <Application.Resources>
         <Style x:Key="CustomFont">
             <Setter Property="TextElement.FontFamily" Value="/Assets/Fonts/#Poppins Medium"></Setter>

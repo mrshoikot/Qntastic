@@ -13,4 +13,45 @@
     <Page Remove="Fonts\**" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="Assets\Images\logo.png" />
+    <None Remove="cross.png" />
+    <None Remove="desk.png" />
+    <None Remove="logo.png" />
+    <None Remove="Pages\illustration.png" />
+    <None Remove="Pages\plus.png" />
+    <None Remove="queues.png" />
+    <None Remove="settings.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\Images\logo.png" />
+    <Resource Include="cross.png" />
+    <Resource Include="desk.png" />
+    <Resource Include="logo.png" />
+    <Resource Include="Pages\illustration.png" />
+    <Resource Include="Pages\plus.png" />
+    <Resource Include="queues.png" />
+    <Resource Include="settings.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MySql.Data" Version="8.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="WebSocketSharp" Version="1.0.3-rc11" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Pages\Entries.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Pages\Entries.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+
 </Project>

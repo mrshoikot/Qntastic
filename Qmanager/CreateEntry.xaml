@@ -1,9 +1,9 @@
-﻿<Window x:Class="Qmanager.CreateEntry"
+﻿<Window x:Class="Qntastic.CreateEntry"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Qmanager"
+        xmlns:local="clr-namespace:Qntastic"
         mc:Ignorable="d"
         Title="Add New Entry" Height="400" Width="350" Background="#FF061238">
     <Grid>
@@ -11,14 +11,14 @@
         <StackPanel>
             <StackPanel Margin="0,65,0,0" Width="220">
                 <TextBlock Style="{StaticResource CustomFont}" Text="Name" Foreground="#fffefe"/>
-                <TextBox Padding="9" TextWrapping="Wrap" Margin="0,2,0,0" FontSize="14"  Style="{StaticResource CustomFont}"/>
+                <TextBox x:Name="nameinput" Padding="9" TextWrapping="Wrap" Margin="0,2,0,0" FontSize="14"  Style="{StaticResource CustomFont}"/>
             </StackPanel>
             <StackPanel Margin="0,15,0,0" Width="220">
                 <TextBlock Style="{StaticResource CustomFont}" Text="Phone Number" Foreground="#fffefe"/>
-                <TextBox Padding="9" TextWrapping="Wrap" Margin="0,2,0,0" FontSize="14"  Style="{StaticResource CustomFont}"/>
+                <TextBox x:Name="phoneinput" Padding="9" TextWrapping="Wrap" Margin="0,2,0,0" FontSize="14"  Style="{StaticResource CustomFont}"/>
             </StackPanel>
             <StackPanel Margin="0,50,0,0">
-                <Button x:Name="EnterButton" Content="Enter" Cursor="Hand"  Height="44" Width="110" BorderThickness="0" Background="#FF009786" Foreground="White" Style="{StaticResource CustomFont}" FontSize="14" MouseEnter="EnterButton_MouseEnter"/>
+                <Button x:Name="EnterButton" Content="Enter" Cursor="Hand"  Height="44" Width="110" BorderThickness="0" Background="#FF009786" Foreground="White" Style="{StaticResource CustomFont}" FontSize="14" MouseEnter="EnterButton_MouseEnter" Click="EnterButton_Click"/>
             </StackPanel>
         </StackPanel>
 

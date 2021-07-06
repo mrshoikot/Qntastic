@@ -10,7 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace Qmanager
+namespace Qntastic
 {
     /// <summary>
     /// Interaction logic for Settings.xaml
