@@ -30,14 +30,16 @@ namespace Qntastic.Pages
         private void loadQueues()
         {
             var queues = State.AllQueues();
-            QueueContainer.ItemsSource = queues;
-            for(int i = 0; i <= Math.Ceiling(queues.Count / 2.0); i++)
+            if (queues.Count % 2 == 0)
             {
-                var rd = new RowDefinition();
-                rd.Height = GridLength.Auto;
-                mainGrid.RowDefinitions.Add(rd);
-                System.Diagnostics.Debug.WriteLine("fuck");
+                QueueContainer.ItemsSource = queues.GetRange(0, queues.Count / 2);
             }
+            else
+            {
+                QueueContainer.ItemsSource = queues.GetRange(0, queues.Count / 2+1);
+            }
+
+            QueueContainer2.ItemsSource = queues.GetRange(queues.Count / 2, queues.Count/2);
         }
 
         private void plusButton_MouseDown(object sender, MouseButtonEventArgs e)

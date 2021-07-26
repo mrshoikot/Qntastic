@@ -33,7 +33,6 @@ namespace Qntastic.Models
             connection.Open();
 
             MySqlCommand command = new MySqlCommand("SELECT COUNT(*) "+sqlpart, connection);
-            Debug.WriteLine("SELECT COUNT(*) " + sqlpart);
             return int.Parse(command.ExecuteScalar().ToString());
         }
 

@@ -40,7 +40,6 @@ namespace Qntastic.Models
         {
             string sql = "SELECT id FROM entries WHERE is_done=0 AND queue_id=" + id + " LIMIT 1";
 
-            Debug.WriteLine("loading");
             MySqlDataReader reader = run(sql);
             while (reader.Read())
             {
@@ -50,7 +49,8 @@ namespace Qntastic.Models
             if (Index < totalEntry)
             {
                 run("UPDATE entries SET is_done=1 WHERE id=" + ActiveEntry.id);
-                Socket.client.Send(token + " " + Index+1);
+                Index++;
+                Socket.client.Send("move "+token + " " + Index);
             }
         }
 
@@ -62,9 +62,18 @@ namespace Qntastic.Models
         }
 
 
-        public List<Entry> Entries()
+        public List<Entry> Entries(bool all=true)
         {
-            string sql = "SELECT id FROM entries WHERE queue_id="+id;
+            string sql;
+
+            if (all)
+            {
+                sql = "SELECT id FROM entries WHERE queue_id=" + id;
+            }
+            else
+            {
+               sql = "SELECT id FROM entries WHERE is_done=0 AND queue_id=" + id;
+            }
 
             MySqlDataReader reader = run(sql);
             List<Entry> entries = new List<Entry>();
@@ -81,7 +90,7 @@ namespace Qntastic.Models
 
         }
 
-        
+
         public int loadTotalEntry()
         {
             totalEntry = count("FROM entries WHERE queue_id=" + id);
@@ -89,23 +98,32 @@ namespace Qntastic.Models
         }
 
 
-        public Queue(int id = 0)
+        public Queue(int id = 0, string token = "")
         {
-            if (id != 0)
+            if (id != 0 || token != "")
             {
-                string sql = "SELECT * from queues WHERE id=" + id.ToString();
+                string sql;
+                if (id != 0)
+                {
+                    sql = "SELECT * from queues WHERE id=" + id.ToString();
+                }
+                else
+                {
+                    sql = "SELECT * from queues WHERE token='" + token+"'";
+                }
+
                 MySqlDataReader reader = run(sql);
 
                 while (reader.Read())
                 {
-                    this.id = id;
+                    this.id = reader.GetInt32(0);
                     this.name = reader.GetString(2);
                     this.token = reader.GetString(1);
                     this.desk = new Desk(reader.GetInt32(3));
                     this.desk_id = desk.id;
                     this.is_active = reader.GetBoolean(4);
                     this.created_at = DateTime.Parse(reader.GetString(5));
-                    System.Diagnostics.Debug.WriteLine(desk.id);
+                    System.Diagnostics.Debug.WriteLine(this.name);
                 }
             }
             loadTotalEntry();

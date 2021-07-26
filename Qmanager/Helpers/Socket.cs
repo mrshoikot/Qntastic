@@ -7,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using WebSocketSharp;
+using Qntastic.Models;
 
 namespace Qntastic.Helpers
 {
@@ -26,7 +27,53 @@ namespace Qntastic.Helpers
             client.OnError += (ss, ee) =>
                Debug.WriteLine("     Error: " +ee.Message);
             client.OnMessage += (ss, ee) =>
-               Debug.WriteLine("Echo: " +ee.Data);
+            {
+                string command = ee.Data.Split(" ")[0];
+                string id = ee.Data.Split(" ")[1];
+
+                if (command == "exit")
+                {
+                    Entry e = new Entry();
+                    e.delete(int.Parse(id));
+                }else if (command == "end")
+                {
+                    Debug.WriteLine(int.Parse(id));
+                    Entry e = new Entry(int.Parse(id));
+                    e.delete(int.Parse(id));
+                    e.save();
+                    client.Send("switch " + e.queue.token + " " + e.id.ToString());
+                }
+                else if (command == "check")
+                {
+                    string token = ee.Data.Split(" ")[2];
+                    id = ee.Data.Split(" ")[1];
+                    Queue q = new Queue(0, token);
+                    if (q.id == 0)
+                    {
+                        client.Send("invalid "+token);
+                    }
+                    else
+                    {
+                        Entry entry = new Entry(int.Parse(id));
+                        if(entry.id == 0)
+                        {
+                            client.Send("invalid " + token);
+                        }else if(entry.queue.token != token)
+                        {
+                            client.Send("invalid " + token);
+                        }else if (entry.is_done)
+                        {
+                            client.Send("done" + "||" + "Bank Asia, Uttara" + "||" + q.desk.name + "||" + q.desk.personal + "||" + q.token);
+                        }
+                        else
+                        {
+                            client.Send("valid"+"||"+"Bank Asia, Uttara" + "||" + q.desk.name + "||" + q.desk.personal + "||" + q.Index + "||" + entry.position() + "||" + q.token);
+                        }
+                    }
+                }
+
+            };
+               
             client.OnClose += (ss, ee) =>
                Debug.WriteLine(string.Format("Disconnected"));
 
