@@ -30,7 +30,9 @@ namespace Qntastic
 
         private void EnterButton_Click(object sender, RoutedEventArgs e)
         {
-            new Entry { name = nameinput.Text, phone = phoneinput.Text, queue = State.SelectedQueue }.save();
+            Entry en = new Entry { name = nameinput.Text, phone = phoneinput.Text, queue = State.SelectedQueue };
+            en.save();
+            en.sms();
             try
             {
                 ((Dashboard)Owner).showEntries();

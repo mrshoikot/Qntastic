@@ -38,7 +38,9 @@ namespace Qntastic.Models
 
         public void delete(int id)
         {
-            run("DELETE FROM " + this.tableName + " WHERE id=" + id);
+            string sql = "DELETE FROM " + this.tableName + " WHERE id=" + id;
+            Debug.WriteLine(sql);
+            run(sql);
         }
 
 

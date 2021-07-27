@@ -11,10 +11,10 @@
         <StackPanel>
             <StackPanel Margin="0,65,0,0" Width="220">
                 <TextBlock Style="{StaticResource CustomFont}" Text="Institute Name" Foreground="#fffefe"/>
-                <TextBox Padding="9" TextWrapping="Wrap" Margin="0,2,0,0" FontSize="14"  Style="{StaticResource CustomFont}"/>
+                <TextBox Padding="9" TextWrapping="Wrap" x:Name="instInput" Margin="0,2,0,0" FontSize="14"  Style="{StaticResource CustomFont}"/>
             </StackPanel>
             <StackPanel Margin="0,50,0,0">
-                <Button x:Name="EnterButton" Content="Update" Cursor="Hand"  Height="44" Width="110" BorderThickness="0" Background="#FF009786" Foreground="White" Style="{StaticResource CustomFont}" FontSize="14" MouseEnter="EnterButton_MouseEnter"/>
+                <Button x:Name="EnterButton" Content="Update" Cursor="Hand"  Height="44" Width="110" BorderThickness="0" Background="#FF009786" Foreground="White" Style="{StaticResource CustomFont}" FontSize="14" MouseEnter="EnterButton_MouseEnter" Click="EnterButton_Click"/>
             </StackPanel>
         </StackPanel>
 

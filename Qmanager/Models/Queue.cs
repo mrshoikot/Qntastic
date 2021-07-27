@@ -100,6 +100,7 @@ namespace Qntastic.Models
 
         public Queue(int id = 0, string token = "")
         {
+            this.tableName = "queues";
             if (id != 0 || token != "")
             {
                 string sql;

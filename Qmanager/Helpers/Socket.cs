@@ -41,7 +41,10 @@ namespace Qntastic.Helpers
                     Entry e = new Entry(int.Parse(id));
                     e.delete(int.Parse(id));
                     e.save();
-                    client.Send("switch " + e.queue.token + " " + e.id.ToString());
+                    if (e.queue != null)
+                    {
+                        client.Send("switch " + e.queue.token + " " + e.id.ToString());
+                    }
                 }
                 else if (command == "check")
                 {
@@ -63,11 +66,11 @@ namespace Qntastic.Helpers
                             client.Send("invalid " + token);
                         }else if (entry.is_done)
                         {
-                            client.Send("done" + "||" + "Bank Asia, Uttara" + "||" + q.desk.name + "||" + q.desk.personal + "||" + q.token);
+                            client.Send("done" + "||" + State.getInst() + "||" + q.desk.name + "||" + q.desk.personal + "||" + q.token);
                         }
                         else
                         {
-                            client.Send("valid"+"||"+"Bank Asia, Uttara" + "||" + q.desk.name + "||" + q.desk.personal + "||" + q.Index + "||" + entry.position() + "||" + q.token);
+                            client.Send("valid"+"||"+ State.getInst() + "||" + q.desk.name + "||" + q.desk.personal + "||" + q.Index + "||" + entry.position() + "||" + q.token);
                         }
                     }
                 }

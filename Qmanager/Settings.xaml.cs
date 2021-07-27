@@ -9,6 +9,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Qntastic.Models;
 
 namespace Qntastic
 {
@@ -25,6 +26,12 @@ namespace Qntastic
         private void EnterButton_MouseEnter(object sender, MouseEventArgs e)
         {
             EnterButton.Foreground = Brushes.Black;
+        }
+
+        private void EnterButton_Click(object sender, RoutedEventArgs e)
+        {
+            State.setInst(instInput.Text);
+            this.Hide();
         }
     }
 }

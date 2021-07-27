@@ -61,7 +61,7 @@ namespace Qntastic.Pages
 
         private void qitem_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            Queue queue = new Queue((int)((Border)sender).Tag);  
+            Queue queue = new Queue((int)((StackPanel)sender).Tag);  
             State.SelectedQueue = queue;
 
             ((Dashboard)Window.GetWindow(this)).Main.Content = new Entries();
@@ -78,6 +78,13 @@ namespace Qntastic.Pages
         {
             Queue queue = new Queue((int)((Button)sender).Tag);
             queue.Move();
+            loadQueues();
+        }
+
+        private void Image_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Queue q = new Queue((int)((Image)sender).Tag);
+            q.delete(q.id);
             loadQueues();
         }
     }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using MySql.Data.MySqlClient;
+using Qntastic.Helpers;
 
 namespace Qntastic.Models
 {
@@ -17,12 +18,21 @@ namespace Qntastic.Models
 
         public void save()
         {
-            string sql = "INSERT INTO entries (name, phone, queue_id) VALUES ('" + name + "', '" + phone + "'," + queue.id + "); SELECT LAST_INSERT_ID();";
-            MySqlDataReader reader = run(sql);
-            while (reader.Read())
+            if (queue != null)
             {
-                this.id = reader.GetInt32(0);
+                string sql = "INSERT INTO entries (name, phone, queue_id) VALUES ('" + name + "', '" + phone + "'," + queue.id + "); SELECT LAST_INSERT_ID();";
+                MySqlDataReader reader = run(sql);
+                while (reader.Read())
+                {
+                    this.id = reader.GetInt32(0);
+                }
             }
+        }
+
+        public void sms()
+        {
+            string body = "Dear " + this.name + ",\nCatch up with your queue status at " + State.getInst() + " by following this below URL.\n" + "http://127.0.0.1:8181/?queue="+queue.token+"&user=" + id;
+            Socket.client.Send("sms||" + phone + "||" + body);
         }
 
         public int position()
